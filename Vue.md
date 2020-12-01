@@ -2,6 +2,8 @@
 
 从官网 https://cn.vuejs.org/v2/guide/installation.html 下载Vue.js，并在html的`<script>`标签中引入
 
+或在 head 标签中用 script 引入：`    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>` 
+
 
 
 ## Hello World
@@ -60,4 +62,25 @@
 - v-html指令：解析html代码
 - v-text指令：直接展示文本，类似{{}}
 - v-pre指令：将{{}}原封不动显示，不做任何解析
-- v-cloak指令：
+
+
+
+2020.12.01
+
+### 创建一个 Vue 实例
+
+- 每个 Vue 应用都是通过用 Vue 函数创建一个新的 Vue 实例开始的
+
+    ```javascript
+    let vm = new Vue({
+      // 选项
+    });
+    ```
+
+- 所有的 Vue 组件都是 Vue 实例
+
+
+
+### 数据
+
+- Vue 实例被创建时，data 对象中的所有 property 加入到 Vue 的相应式系统中

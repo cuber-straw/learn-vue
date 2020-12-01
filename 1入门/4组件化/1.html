@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件化应用构建</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <ol>
+        <!-- 创建一个 todo-item 组件实例 -->
+        <todo-item></todo-item>
+    </ol>
+</div>
+<script>
+    // 定义名为 todo-item 的组件，为每个代办项渲染同样的文本
+    Vue.component('todo-item', {
+        template: '<li>这是一个代办项</li>'
+    })
+    const app = new Vue({
+        el: '#app',
+    })
+</script>
+</body>
+
+</html>

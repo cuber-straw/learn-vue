@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <ol>
+        <todo-item 
+            v-for="item in list"
+            v-bind:todo="item"
+            v-bind:key="item.id"
+        ></todo-item>
+    </ol>
+</div>
+<script>
+    Vue.component('todo-item', {
+        // todo-item 组件现在接受一个props，类似一个自定义属性，这个props名为 todo
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>',
+    })
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                { id: 1, text: "蔬菜" },
+                { id: 2, text: "奶酪" },
+                { id: 3, text: "水果" }
+            ]
+        }
+    })
+</script>
+</body>
+
+</html>
