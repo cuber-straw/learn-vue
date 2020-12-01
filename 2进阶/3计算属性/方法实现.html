@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通过方法实现</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <p>origin message: {{message}}</p>
+        <p>reversed message: {{reversedMessage()}}</p>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'this is my message',
+            },
+            // 定义方法
+            methods: {
+                reversedMessage: function() {
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

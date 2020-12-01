@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>origin message: {{message}}</p>
+        <p>reversed message: {{reversedMessage}}</p>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'this is origin message',
+            },
+            // 定义计算属性
+            computed: {
+                reversedMessage: function(){
+                    return this.message.split('').reverse().join('');
+                }
+            }
+
+            // console 中，message 和 reversedMessage 都是 vm 的属性
+            // console 中修改 vm 的 message 的值，reversedMessage 的值也会相应修改
+        })
+    </script>
+</body>
+
+</html>
