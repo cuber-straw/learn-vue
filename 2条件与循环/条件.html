@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件与循环1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="seen">seen是true</p>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                seen: true
+            }
+        })
+    </script>
+</body>
+</html>

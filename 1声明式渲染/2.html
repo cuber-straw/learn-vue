@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-bind 被称为 指令，指令带有前缀 v-，以表示是 vue 提供的特殊 attribute -->
+        <!-- 将这个元素的 title attribute 与 vue 实例的 message property 保持一致 -->
+        <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '页面加载于' + new Date().toLocaleString()
+            }
+        });
+    </script>
+</body>
+
+</html>
