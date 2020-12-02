@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:style="[baseStyles, overridingStyles]">
+            hello array binding
+        </div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                baseStyles: {
+                    width: '200px',
+                    height: '200px',
+                    backgroundColor: '#ff0000',
+                },
+                overridingStyles: {
+                    fontSize: '15px',
+                    color: '#d2d2d2',
+                    textAlign: 'center',
+                    lineHeight: '200px',
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

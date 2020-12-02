@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-else</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="num<0.3">
+            num小于0.3
+        </div>
+        <div v-else-if="num<0.5">
+            num在0.3-0.5之间
+        </div>
+        <div v-else-if="num<0.8">
+            num在0.5-0.8之间
+        </div>
+        <div v-else>
+            num在0.8-1之间
+        </div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                num: Math.random()
+            },
+            mounted: function(){
+                console.log(this.num);
+            }
+        })
+    </script>
+</body>
+
+</html>

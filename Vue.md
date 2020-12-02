@@ -135,6 +135,109 @@
 
 
 
-### 绑定内联样式
+### 条件渲染
 
-- 
+- v-if 是真正的条件渲染，是惰性的，如果初始渲染时条件为假，就什么都不做直到条件为真时；v-show 不管条件是什么，元素总是会被渲染，只是简单的基于 CSS 切换
+- v-if 有更高的切换开销，v-show 有更高的初始渲染开销
+- 不推荐同时使用 v-if 和 v-for
+
+
+
+### 列表渲染
+
+- 使用 数组
+    - 数组更新检测
+        - 变更方法：这些方法变更原始数组
+        - 替换数组：这些方法不会变更原始数组，而是返回新的数组
+- 使用 对象
+- 由于 js 的限制，vue 不能检测数组和对象的变化
+
+
+
+### 事件处理
+
+- 可以用 v-on 指令监听 DOM 事件，并在运行时触发一些 js 代码
+
+- 逻辑简单的情况下，`v-on:click` 中可以直接写 js 代码
+- 逻辑复杂时，`v-on:click` 中写需要调用的方法的名称
+
+
+
+### 表单输入绑定
+
+#### 基础用法
+
+1. 文本
+2. 多行文本
+3. 复选框
+4. 单选按钮
+5. 选择框
+
+#### 值绑定
+
+1. 复选框
+
+    ```html
+    <input
+      type="checkbox"
+      v-model="toggle"
+      true-value="yes"
+      false-value="no"
+    >
+    ```
+
+    ```js
+    // 当选中时
+    vm.toggle === 'yes'
+    // 当没有选中时
+    vm.toggle === 'no'
+    ```
+
+2. 单选按钮
+
+    ```html
+    <input type="radio" v-model="pick" v-bind:value="a">
+    ```
+
+    ```js
+    // 当选中时
+    vm.pick === vm.a
+    ```
+
+3. 选择框的选项
+
+    ```html
+    <select v-model="selected">
+        <!-- 内联对象字面量 -->
+      <option v-bind:value="{ number: 123 }">123</option>
+    </select>
+    ```
+
+    ```js
+    // 当选中时
+    typeof vm.selected // => 'object'
+    vm.selected.number // => 123
+    ```
+
+#### 修饰符
+
+1. .lazy
+
+    在默认情况下，`v-model` 在每次 `input` 事件触发后将输入框的值与数据进行同步 (除了上述输入法组合文字时)。你可以添加 `lazy` 修饰符，从而转为在 `change` 事件之后进行同步
+
+2. .number
+
+    如果想自动将用户的输入值转为数值类型，可以给 `v-model` 添加 `number` 修饰符
+
+    ```html
+    <input v-model.number="age" type="number">
+    ```
+
+3. .trim
+
+    如果要自动过滤用户输入的首尾空白字符，可以给 `v-model` 添加 `trim` 修饰符：
+
+    ```html
+    <input v-model.trim="msg">
+    ```
+

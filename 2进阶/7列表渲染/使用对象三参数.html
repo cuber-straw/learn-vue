@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <!-- 两个参数时，第一个参数是 值，第二个参数是 键，第三个参数是 index -->
+            <li v-for="(value, name, index) in myobject">
+                {{name}}, {{value}}, {{index}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                myobject: {
+                    title: '标题',
+                    message1: '第一条消息',
+                    paragraph: '第一段文字'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

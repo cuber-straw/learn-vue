@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <div v-bind:style="{color: activeColor, fontSize: fontSize + 'px', height: height + 'px', width: width + 'px'}">
+            hello object binding
+        </div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                activeColor: '#ff0000',
+                fontSize: 50,
+                height: 200,
+                width: 200,
+            }
+        })
+    </script>
+</body>
+</html>
