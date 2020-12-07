@@ -84,6 +84,7 @@
 ### 数据
 
 - Vue 实例被创建时，data 对象中的所有 property 加入到 Vue 的相应式系统中
+- Vue 的实例代理了 data 对象上的所有 property ，因此访问 `vm.a` 等价于 `vm.$data.a` 
 
 
 
@@ -240,4 +241,192 @@
     ```html
     <input v-model.trim="msg">
     ```
+
+
+
+## Vuex
+
+每一个 Vuex 应用的核心就是 store （仓库），仓库中包含着应用大部分的 state （状态）。
+
+Vuex 和单纯的全局对象有两点不同：
+
+1. Vuex 的状态存储是相应式的
+2. 你不能直接改变 store 中的状态，改变 store 中状态唯一的途径是显示地提交（commit）mutation。
+
+
+
+Vuex 使用单一状态树——一个对象包含全部状态。每个应用仅仅包含一个 store 实例。
+
+
+
+### 1. Vuex 概述
+
+#### 1.1 组件之间共享数据的方式
+
+父向子传值：v-bind 属性绑定
+
+子向父传值：v-on 事件绑定
+
+兄弟组件之间数据共享：EventBus
+
+- $on 接受数据的那个组件
+- $emit 发送数据的那个组件
+
+### 1.2 Vuex 是什么
+
+Vuex 是实现组件全局状态管理的一种机制。可以方便得实现组件之间的数据共享。
+
+### 1.3 什么样的数据适合存储在 Vuex 中
+
+一般情况下，只有组件之间共享的数据，才有必要存储到 vuex 中；对于组件中私有的数据，依旧存储在组件自身的 data 中即可。
+
+### 2. Vuex 的基本使用
+
+1. 安装 Vuex 依赖包
+2. 导入 vuex 包
+3. 创建 store 对象
+4. 将 store 对象挂载到 Vue 实例中
+
+
+
+### 3. Vuex 的核心概念
+
+vuex 中的主要核心概念如下：
+
+- state
+- mutation
+- action
+- getter
+
+#### 3.2 state
+
+state 提供唯一的公共数据源，所有共享的数据都要统一放到 Store 的 State 中进行存储。
+
+```js
+const store = new Vuex.Store({
+  state: {count: 0}
+})
+```
+
+组件中访问 state 数据的第一种方式：
+
+```js
+this.$store.state.全局数据名称
+```
+
+组件中访问 state 数据的第二种方式：
+
+```js
+// 1. 从 vuex 中按需导入 mapState 函数
+import {mapState} from 'vuex'
+
+// 2. 通过刚才导入的 mapState 函数，将当前组件需要的全局数据，映射为当前组件的 computed 计算属性
+computed: {
+  ...mapState(['count']);
+}
+```
+
+#### 3.3 mutation
+
+mutation 用于变更 store 中的数据。
+
+- 只能通过 mutation 变更 store 中的数据，不可以直接操作 store 中的数据
+- 通过这种方式虽然操作起来繁琐一些，但是可以集中监控所有的数据变化。
+
+可以在触发 mutation 时传递参数：
+
+```js
+state: {
+  count: 0
+}
+mutations: {
+  addN(state, step): {
+    state.count += step
+  }
+}
+```
+
+```js
+this.$store.commit('addN', 3)
+```
+
+commit 是触发 mutations 的第一种方式，触发 mutations 的第二种方式：
+
+```js
+// 1. 从 vuex 中按需导入 mapMutations 函数
+import {mapMutations} from 'vuex'
+
+// 2. 将指定的 mutations 函数，映射为当前组件的 methods 函数
+methods: {
+  ...mapMutations('add', 'addN')
+}
+```
+
+#### 3.4 Action
+
+mutations 函数中不能执行异步任务，action 用于处理异步任务。
+
+如果通过异步操作变更数据，必须通过 action，而不能使用 mutation，但是在 action 中还是要通过触发 mutation 的方式间接变更数据。
+
+```js
+actions: {
+  addAsync(context) {
+    setTimeout(() => {
+      context.commit('add')
+    }, 1000)
+  }
+}
+// 触发 action
+methods: {
+  handle() {
+    // 触发 action 的第一种方式
+    this.$store.dispatch('addAsync')
+  }
+}
+```
+
+触发 action 异步任务时携带参数：与 mutation 携带参数类似
+
+触发 action 的第二种方式：
+
+```js
+import { mapActions } from 'vuex'
+methods: {
+  ...mapActions(['addAsync', 'addNAsync'])
+}
+```
+
+#### 3.5 Getter
+
+Getter 用于对 Store 中的数据进行加工处理形成新的数据，类似 vue 中的计算属性。Getter 不会修改 Store 中的原数据。
+
+- store 中数据发生变化时，getter 中的数据也会变化。
+
+```js
+// 定义 getter
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  getter: {
+    showNum: state => {
+      return state.count
+    }
+  }
+})
+```
+
+- 使用 getter 的第一种方式：`this.$store.getters.名称`
+
+- 使用 getter 的第二种方式：
+
+    ```js
+    import {mapGetters} from 'vuex'
+    
+    computed: {
+      ...mapGetters(['showNum'])
+    }
+    ```
+
+    
 
