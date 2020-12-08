@@ -6,6 +6,18 @@
 
 
 
+安装 vue-cli：`sudo npm install -g vue-cli` -g 表示全局安装，因为是安装在全局目录下，所以需要管理员权限。否则会报错： `The operation was rejected by your operating system.` 
+
+![](/Users/qiaodisheng/截屏录屏/安装vue-cli.png)
+
+
+
+![](/Users/qiaodisheng/截屏录屏/vue-cli .png)
+
+卸载：`sudo npm uninstall vue-cli -g` 
+
+安装最新版 vue-cli 应该用 `sudo npm install @vue/cli -g` ，注意有个 @ ，vue cli 的包名称由 vue-cli 改成了 @vue/cli
+
 ## Hello World
 
 ### 案例1
