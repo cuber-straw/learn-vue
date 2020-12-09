@@ -11,7 +11,7 @@ export default new Vuex.Store({
         // 文本框内容
         inputValue: '',
         nextId: 2,
-        viewKey: 'all',
+        viewKey: 'all'
     },
     mutations: {
         initList(state, list) {
@@ -24,22 +24,22 @@ export default new Vuex.Store({
             const obj = {
                 id: state.nextId,
                 info: state.inputValue,
-                done: false,
+                done: false
             }
             state.list.push(obj)
-            state.inputValue = '';
-            state.nextId++;
+            state.inputValue = ''
+            state.nextId++
         },
         removeItem(state, id) {
-            const index = state.list.findIndex(x => x.id === id);
-            state.list.splice(index, 1);
+            const index = state.list.findIndex(x => x.id === id)
+            state.list.splice(index, 1)
         },
         changeStatus(state, param) {
-            const index = state.list.findIndex(x => x.id === param.id);
-            state.list[index].done = param.status;
+            const index = state.list.findIndex(x => x.id === param.id)
+            state.list[index].done = param.status
         },
         cleanDone(state) {
-            state.list = state.list.filter(x => x.done === false);
+            state.list = state.list.filter(x => x.done === false)
         },
         changeViewKey(state, key) {
             state.viewKey = key
